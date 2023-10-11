@@ -23,6 +23,9 @@ public class OrderService {
 	private OrderRepository orderRepository;
 	
 	@Autowired
+	private InventoryService inventoryService;
+	
+	@Autowired
 	private ModelMapper modelMapper;
 	
 	
@@ -38,11 +41,15 @@ public class OrderService {
 
 	public OrderDto createOrder(OrderDto orderDto) {
 		
+		/*
 		InventoryDto inventoryDto = WebClient.create(inventoryServiceUrl+"/"+orderDto.getSkuCode())
 		.get()
 		.retrieve()
 		.bodyToMono(InventoryDto.class)
 		.block();
+		*/
+		
+		InventoryDto inventoryDto = inventoryService.getInventoryBySkuCode(orderDto.getSkuCode());
 		
 		if(orderDto.getQuantity() >= inventoryDto.getAvailableQuantity())
 			return null;
