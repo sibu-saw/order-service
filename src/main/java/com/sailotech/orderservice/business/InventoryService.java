@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.sailotech.orderservice.dto.InventoryDto;
 
-@FeignClient("inventory-service")
+@FeignClient("api-gateway")
 public interface InventoryService {
 
-	@GetMapping("inventory/{skuCode}")
+	@GetMapping("api/inventory/{skuCode}") 
 	public InventoryDto getInventoryBySkuCode(@PathVariable String skuCode);
 }
